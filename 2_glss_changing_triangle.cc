@@ -1,5 +1,6 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include <cmath>
 
 #include <iostream>
 
@@ -14,13 +15,14 @@ const char *vertexShaderSource = "#version 330 core\n"
     "layout (location = 0) in vec3 aPos;\n"
     "void main()\n"
     "{\n"
-    "   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
+    "gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
     "}\0";
 const char *fragmentShaderSource = "#version 330 core\n"
     "out vec4 FragColor;\n"
+    "uniform vec4 ourColor;\n"
     "void main()\n"
     "{\n"
-    "   FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
+    "   FragColor = ourColor;\n"
     "}\n\0";
 
 int main()
@@ -100,28 +102,12 @@ int main()
     // set up vertex data (and buffer(s)) and configure vertex attributes
     // ------------------------------------------------------------------
     float vertices[] = {
-        -0.6f, 0.0f, 0.0f,
-        -0.3f, 0.6f, 0.0f,
-        0.0f, 0.0f, 0.0f,
-        0.6f, 0.0f, 0.0f,
-        0.3f,0.6f, 0.0f, 
-        -0.3f, -0.6f, 0.0f
-
-    };
-    GLfloat firstTriangle[] = {
-        -0.9f, -0.5f, 0.0f,  // Left 
-        -0.0f, -0.5f, 0.0f,  // Right
-        -0.45f, 0.5f, 0.0f,  // Top 
-    };
-    GLfloat secondTriangle[] = {
-         0.0f, -0.5f, 0.0f,  // Left
-         0.9f, -0.5f, 0.0f,  // Right
-         0.45f, 0.5f, 0.0f   // Top 
+        -0.6f, -0.3f, 0.0f,
+        -0.0f, 0.6f, 0.0f,
+        0.6f, -0.3f, 0.0f
     };
     unsigned int indices[] = {  // note that we start from 0!
         0, 1, 2,  // first Triangle
-        2, 3, 4,   // second Triangle
-        0, 2, 5
     };
     unsigned int VBO, VAO, EBO;
     glGenVertexArrays(1, &VAO);
@@ -166,12 +152,17 @@ int main()
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
+        GLfloat timeValue = glfwGetTime();
+        GLfloat greenValue = (sin(timeValue) / 2) + 0.5;
+        GLint vertexColorLocation = glGetUniformLocation(shaderProgram, "ourColor");
+
         // draw our first triangle
         glUseProgram(shaderProgram);
+        glUniform4f(vertexColorLocation, 0.0f, greenValue, 0.0f, 1.0f);
         glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
         glBindVertexArray(VAO); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
         //glDrawArrays(GL_TRIANGLES, 0, 6);
-        glDrawElements(GL_TRIANGLES, 9, GL_UNSIGNED_INT, 0);
+        glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, 0);
         // glBindVertexArray(0); // no need to unbind it every time 
  
         // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
@@ -208,4 +199,4 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
     // make sure the viewport matches the new window dimensions; note that width and 
     // height will be significantly larger than specified on retina displays.
     glViewport(0, 0, width, height);
-nn}
+}
