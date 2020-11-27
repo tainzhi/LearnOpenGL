@@ -9,4 +9,5 @@ CMakeFiles/myLearnOpenGL.dir/main.cc.o: main.cc
 CMakeFiles/myLearnOpenGL.dir/main.cc.o: /usr/local/Cellar/glfw/3.3.2/include/GLFW/glfw3.h
 CMakeFiles/myLearnOpenGL.dir/main.cc.o: glad/include/KHR/khrplatform.h
 CMakeFiles/myLearnOpenGL.dir/main.cc.o: glad/include/glad/glad.h
+CMakeFiles/myLearnOpenGL.dir/main.cc.o: include/SOIL.h
 

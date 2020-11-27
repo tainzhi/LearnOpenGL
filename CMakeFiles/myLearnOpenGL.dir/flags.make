@@ -7,11 +7,11 @@ C_FLAGS =  -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk
 
 C_DEFINES = 
 
-C_INCLUDES = -I/usr/local/Cellar/glfw/3.3.2/include -I/Users/muqing/myLearnOpenGL/./glad/include 
+C_INCLUDES = -I/usr/local/Cellar/glfw/3.3.2/include -I/Users/muqing/myLearnOpenGL/./glad/include -I/Users/muqing/myLearnOpenGL/./include 
 
 CXX_FLAGS =  -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk  
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/usr/local/Cellar/glfw/3.3.2/include -I/Users/muqing/myLearnOpenGL/./glad/include 
+CXX_INCLUDES = -I/usr/local/Cellar/glfw/3.3.2/include -I/Users/muqing/myLearnOpenGL/./glad/include -I/Users/muqing/myLearnOpenGL/./include 
 

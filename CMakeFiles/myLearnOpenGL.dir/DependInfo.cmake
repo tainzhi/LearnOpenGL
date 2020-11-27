@@ -13,6 +13,7 @@ set(CMAKE_C_COMPILER_ID "AppleClang")
 set(CMAKE_C_TARGET_INCLUDE_PATH
   "/usr/local/Cellar/glfw/3.3.2/include"
   "./glad/include"
+  "./include"
   )
 set(CMAKE_DEPENDS_CHECK_CXX
   "/Users/muqing/myLearnOpenGL/main.cc" "/Users/muqing/myLearnOpenGL/CMakeFiles/myLearnOpenGL.dir/main.cc.o"
@@ -23,6 +24,7 @@ set(CMAKE_CXX_COMPILER_ID "AppleClang")
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "/usr/local/Cellar/glfw/3.3.2/include"
   "./glad/include"
+  "./include"
   )
 
 # Targets to which this target links.

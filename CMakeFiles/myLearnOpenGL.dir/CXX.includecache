@@ -13,6 +13,8 @@ GLFW/glfw3.h
 -
 cmath
 -
+SOIL.h
+-
 iostream
 -
 
@@ -71,4 +73,6 @@ stdint.h
 glad/include/glad/glad.h
 KHR/khrplatform.h
 -
+
+include/SOIL.h
 
