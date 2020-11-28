@@ -18,8 +18,8 @@ target_include_directories(glad
     ${PROJECT_SOURCE_DIR}/glad/include
 )
 
-add_library(soil STATIC IMPORTED)
-set_target_properties(soil PROPERTIES IMPORTED_LOCATION ${CMAKE_SOURCE_DIR}/lib/libSOIL.a)
+# add_library(soil STATIC IMPORTED)
+# set_target_properties(soil PROPERTIES IMPORTED_LOCATION ${CMAKE_SOURCE_DIR}/lib/libSOIL.a)
 
 # 添加头文件地址, 相等于g++ -I
 include_directories(${CMAKE_SOURCE_DIR}/include) #添加头文件
@@ -30,5 +30,5 @@ include_directories(${CMAKE_SOURCE_DIR}/include) #添加头文件
 # 生成可执行文件 ${PROJECT_NAME}
 add_executable(${PROJECT_NAME} main.cc)
 # 为可执行文件${PROJECT_NAME}添加共享库链接
-target_link_libraries(${PROJECT_NAME} glad soil)
+target_link_libraries(${PROJECT_NAME} glad)
 

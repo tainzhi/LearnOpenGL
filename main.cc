@@ -2,8 +2,10 @@
 #include <GLFW/glfw3.h>
 #include <cmath>
 #include <iostream>
-#include <stb_image.h>
 #include <filesystem.h>
+#define STB_IMAGE_IMPLEMENTATION
+#include "stb_image.h"
+
 
 void framebuffer_size_callback(GLFWwindow *window, int width, int height);
 void processInput(GLFWwindow *window);
@@ -28,10 +30,11 @@ const char *fragmentShaderSource = "#version 330 core\n"
                                    "in vec3 ourColor;\n"
                                    "in vec2 TexCoord;\n"
                                    "out vec4 color;\n"
-                                   "uniform sampler2D ourTexture;\n"
+                                   "uniform sampler2D texture1;\n"
+                                   "uniform sampler2D texture2;\n"
                                    "void main()\n"
                                    "{\n"
-                                   "   color = texture(ourTexture, TexCoord);\n"
+                                   "   color = mix(texture(texture1, TexCoord), texture(texture2, TexCoord), 0.5);\n"
                                    "}\n\0";
 
 int main()
@@ -155,14 +158,15 @@ int main()
     // VAOs requires a call to glBindVertexArray anyways so we generally don't unbind VAOs (nor VBOs) when it's not directly necessary.
     glBindVertexArray(0);
 
-    GLuint texture;
-    glGenTextures(1, &texture);
-    glBindTexture(GL_TEXTURE_2D, texture);
+    GLuint texture1, texture2;
+    glGenTextures(1, &texture1);
+    glBindTexture(GL_TEXTURE_2D, texture1);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     int width, height, channels;
+    stbi_set_flip_vertically_on_load(true);
     unsigned char *image = stbi_load( FileSystem::getPath("resources/textures/container.jpg").c_str(), &width, &height, &channels, 0);
     if (image) {
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
@@ -171,7 +175,26 @@ int main()
         std::cout<<"Failed to load texture"<<std::endl;
     }
     stbi_image_free(image);
-    glBindTexture(GL_TEXTURE_2D, 0);
+
+    glGenTextures(1, &texture2);
+    glBindTexture(GL_TEXTURE_2D, texture2);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    image = stbi_load( FileSystem::getPath("resources/textures/awesomeface.png").c_str(), &width, &height, &channels, 0);
+    if (image) {
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
+        glGenerateMipmap(GL_TEXTURE_2D);
+    } else {
+        std::cout<<"Failed to load texture"<<std::endl;
+    }
+    stbi_image_free(image);
+
+    glUseProgram(fragmentShader);
+    glUniform1i(glGetUniformLocation(fragmentShader, "texture1"), 0);
+    glUniform1i(glGetUniformLocation(fragmentShader, "texture2"), 1);
+
 
     // uncomment this call to draw in wireframe polygons.
     //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
@@ -189,20 +212,15 @@ int main()
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
-        // GLfloat timeValue = glfwGetTime();
-        // GLfloat greenValue = (sin(timeValue) / 2) + 0.5;
-        // GLint vertexColorLocation = glGetUniformLocation(shaderProgram, "ourColor");
-
-        glBindTexture(GL_TEXTURE_2D, texture);
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, texture1);
+        glActiveTexture(GL_TEXTURE1);
+        glBindTexture(GL_TEXTURE_2D, texture2);
 
         // draw our first triangle
         glUseProgram(shaderProgram);
-        // glUniform4f(vertexColorLocation, 0.0f, greenValue, 0.0f, 1.0f);
-        glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
         glBindVertexArray(VAO); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
-        //glDrawArrays(GL_TRIANGLES, 0, 6);
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-        glBindVertexArray(0); // no need to unbind it every time
 
         // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
         // -------------------------------------------------------------------------------
