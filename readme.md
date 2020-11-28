@@ -10,6 +10,8 @@ gcc -Iinclude/ -shared src/glad.c -o glad.so
 ```
 
 ## download and install [soil](https://github.com/littlstar/soil)
+- 不使用soil, 使用[stb_image](https://learnopengl-cn.github.io/01%20Getting%20started/06%20Textures/)
+- 图片路径只能绝对路径
 
 
 

@@ -1,2 +1,3 @@
-CMakefiles/
+CMakeFiles/
 Makefile
+*.a
