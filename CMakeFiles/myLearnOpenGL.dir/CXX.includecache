@@ -8,12 +8,10 @@
 
 /Users/muqing/myLearnOpenGL/main.cc
 glad/glad.h
--
+/Users/muqing/myLearnOpenGL/glad/glad.h
 GLFW/glfw3.h
 -
 cmath
--
-SOIL.h
 -
 iostream
 -
@@ -62,7 +60,7 @@ GL/glext.h
 GL/glu.h
 -
 
-glad/include/KHR/khrplatform.h
+include/KHR/khrplatform.h
 stdint.h
 -
 inttypes.h
@@ -70,9 +68,7 @@ inttypes.h
 stdint.h
 -
 
-glad/include/glad/glad.h
+include/glad/glad.h
 KHR/khrplatform.h
 -
-
-include/SOIL.h
 
