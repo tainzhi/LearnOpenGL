@@ -13,6 +13,9 @@ gcc -Iinclude/ -shared src/glad.c -o glad.so
 - 不使用soil, 使用[stb_image](https://learnopengl-cn.github.io/01%20Getting%20started/06%20Textures/)
 - 图片路径只能绝对路径
 
+## [dowaload glm](https://github.com/g-truc/glm)
+- a header-only library, and thus does not need to be compiled
+
 
 
 ## problems
