@@ -1,3 +1,0 @@
-/Users/muqing/myLearnOpenGL/CMakeFiles/rebuild_cache.dir
-/Users/muqing/myLearnOpenGL/CMakeFiles/edit_cache.dir
-/Users/muqing/myLearnOpenGL/CMakeFiles/myLearnOpenGL.dir
