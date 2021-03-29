@@ -1,7 +1,13 @@
-## edit CMakeLists.txt
+## usage
 
+1. edit CMakeLists.txt, then create Makefile by cmake
 ```bash
 cmake CMakeLists.txt
+```
+
+2. make && run
+```bash
+./make -j8 && ./myLearnOpenGL
 ```
 
 ## download glad and compile so
