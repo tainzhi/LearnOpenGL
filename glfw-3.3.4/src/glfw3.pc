@@ -1,0 +1,13 @@
+prefix=D:/LearnOpenGL/glfw-3.3.4/build
+exec_prefix=${prefix}
+includedir=D:/LearnOpenGL/glfw-3.3.4/build/include
+libdir=D:/LearnOpenGL/glfw-3.3.4/build/lib
+
+Name: GLFW
+Description: A multi-platform library for OpenGL, window and input
+Version: 3.3.4
+URL: https://www.glfw.org/
+Requires.private: 
+Libs: -L${libdir} -lglfw3
+Libs.private:  -lgdi32
+Cflags: -I${includedir}
