@@ -1,6 +1,7 @@
-CMakeCache.txt
-cmake_install.cmake
 CMakeFiles/
 Makefile
+CMakeCache.txt
+cmake_install.cmake
+build/
 *.o
 *~
