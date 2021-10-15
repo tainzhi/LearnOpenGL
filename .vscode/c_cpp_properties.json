@@ -1,0 +1,36 @@
+{
+    "configurations": [
+        {
+            "name": "Win32",
+            "includePath": [                                  //includePath 头文件目录
+                "${workspaceFolder}",
+                "${workspaceFolder}/configuration",
+                "${workspaceFolder}/glad/include",
+                "${workspaceFolder}/glfw-3.3.4/build/include",
+                "${workspaceFolder}/include"
+
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE"
+            ],
+            // "compilerPath": "D:/portable software/llvm-mingw-20211002-msvcrt-x86_64/bin/clang++.exe",         //user/mingw/bin/gcc.exe 需要自己配置
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "clang-x64",
+            "browse": {                                        //includePath 头文件目录
+                "path": [
+                    "${workspaceFolder}",
+                    "${workspaceFolder}/configuration",
+                    "${workspaceFolder}/glad/include",
+                    "${workspaceFolder}/glfw-3.3.4/build/include",
+                    "${workspaceFolder}/include"
+                ],
+                "limitSymbolsToIncludedHeaders": true,
+                "databaseFilename": ""
+            }
+        }
+    ],
+    "version": 4
+}
