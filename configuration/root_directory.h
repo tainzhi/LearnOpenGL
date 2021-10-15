@@ -1,1 +1,1 @@
-const char * logl_root = "/Users/muqing/code/myLearnOpenGL";
+const char * logl_root = "D:/LearnOpenGL";
