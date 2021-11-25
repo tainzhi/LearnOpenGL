@@ -4,7 +4,7 @@
 		{
 			"type": "shell",
 			"label": "make_run",
-			"command": "cmake -G 'Unix Makefiles' -DCMAKE_BUILD_TYPE=Debug && make -j8 && ./myLearnOpenGL",
+			"command": "cmake -G 'Unix Makefiles' -S. -Bbuild -DCMAKE_BUILD_TYPE=Debug && make -C build -j8 && ./build/myLearnOpenGL",
 			"options": {
 				"cwd": "./" //当前执行目录
 			},
