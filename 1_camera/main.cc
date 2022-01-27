@@ -221,8 +221,6 @@ int main()
         glActiveTexture(GL_TEXTURE1);
         glBindTexture(GL_TEXTURE_2D, texture2);
 
-        glBindTexture(GL_TEXTURE_2D, texture2);
-
         ourShader.use();
 
         glBindVertexArray(VAO);
