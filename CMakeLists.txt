@@ -9,8 +9,15 @@ if(APPLE)
          set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${GCC_COVERAGE_LINK_FLAGS} -I/usr/local/lib -framework Cocoa -framework IOKit -framework CoreVideo -framework OpenGL -lglfw")
 endif()
 
-# 一些设置, 比如设置根目录
-configure_file(configuration/root_directory.h.in configuration/root_directory.h)
+
+# 从根目录下Textures加载图片
+set(RESOURCE_ROOT "${CMAKE_SOURCE_DIR}/resources/")
+message("source_root=${RESOURCE_ROOT}")
+# 每个课程对应地当前目录
+set(SRC_ROOT "${CMAKE_SOURCE_DIR}/0-Gettings-Started/Textures/")
+message("src_root=${SRC_ROOT}")
+# 在根目录下configuration定义，然后 build/configuration/root_directory.h 
+configure_file(${CMAKE_SOURCE_DIR}/configuration/root_directory.h.in ${CMAKE_BINARY_DIR}/configuration/root_directory.h)
 include_directories(${CMAKE_BINARY_DIR}/configuration)
 
 # glfw3
@@ -31,7 +38,8 @@ set_target_properties(glad PROPERTIES
 # set_target_properties(soil PROPERTIES IMPORTED_LOCATION ${CMAKE_SOURCE_DIR}/lib/libSOIL.a)
 
 include_directories(${CMAKE_SOURCE_DIR}/include) #添加头文件
-file(GLOB MAIN_SRC ${CMAKE_CURRENT_SOURCE_DIR}/0-Gettings-Started/Hello-Triangle/3_two_vaos_two_shaders.cc)
+
+file(GLOB MAIN_SRC "${SRC_ROOT}/0-container-face.cc")
 # 生成可执行文件 ${PROJECT_NAME}
 add_executable(${PROJECT_NAME} ${MAIN_SRC})
 

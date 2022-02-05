@@ -2,8 +2,10 @@
 #include <GLFW/glfw3.h>
 #include <cmath>
 #include <iostream>
-#include <stb_image.h>
 #include <filesystem.h>
+#define STB_IMAGE_IMPLEMENTATION
+#include "stb_image.h"
+#include "shader_s.h"
 
 void framebuffer_size_callback(GLFWwindow *window, int width, int height);
 void processInput(GLFWwindow *window);
@@ -153,7 +155,7 @@ int main()
 
     // You can unbind the VAO afterwards so other VAO calls won't accidentally modify this VAO, but this rarely happens. Modifying other
     // VAOs requires a call to glBindVertexArray anyways so we generally don't unbind VAOs (nor VBOs) when it's not directly necessary.
-    glBindVertexArray(0);
+    // glBindVertexArray(0);
 
     GLuint texture;
     glGenTextures(1, &texture);
