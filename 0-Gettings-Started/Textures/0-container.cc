@@ -2,10 +2,11 @@
 #include <GLFW/glfw3.h>
 #include <cmath>
 #include <iostream>
-#include <filesystem.h>
+#include "filesystem.h"
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 #include "shader_s.h"
+
 
 void framebuffer_size_callback(GLFWwindow *window, int width, int height);
 void processInput(GLFWwindow *window);
@@ -165,7 +166,7 @@ int main()
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     int width, height, channels;
-    unsigned char *image = stbi_load( FileSystem::getPath("resources/textures/container.jpg").c_str(), &width, &height, &channels, 0);
+    unsigned char *image = stbi_load( FileSystem::getResourcePath("resources/textures/container.jpg").c_str(), &width, &height, &channels, 0);
     if (image) {
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
         glGenerateMipmap(GL_TEXTURE_2D);

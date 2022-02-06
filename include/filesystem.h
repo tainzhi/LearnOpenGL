@@ -17,16 +17,24 @@ public:
     return (*pathBuilder)(path);
   }
 
+  static std::string getResourcePath(const std::string &path) {
+    return project_root + std::string("/") + path;
+  }
+
+  static std::string getShaderPath(const std::string &path) {
+    return src_root + std::string("/") + path;
+  }
+
 private:
   static std::string const &getRoot()
   {
     static char const *envRoot = getenv("LOGL_ROOT_PATH");
-    static char const *givenRoot = (envRoot != nullptr ? envRoot : logl_root);
+    static char const *givenRoot = (envRoot != nullptr ? envRoot : project_root);
     static std::string root = (givenRoot != nullptr ? givenRoot : "");
     return root;
   }
 
-  //static std::string(*foo (std::string const &)) getPathBuilder()
+  // static std::string(*foo (std::string const &)) getPathBuilder()
   static Builder getPathBuilder()
   {
     if (getRoot() != "")

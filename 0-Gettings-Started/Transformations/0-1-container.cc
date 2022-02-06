@@ -2,7 +2,7 @@
 #include <GLFW/glfw3.h>
 #include <cmath>
 #include <iostream>
-#include <filesystem.h>
+#include "filesystem.h"
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 #include "shader_s.h"
@@ -54,7 +54,7 @@ int main()
 
     // build and compile our shader zprogram
     // ------------------------------------
-    Shader ourShader(FileSystem::getPath("texture.vs").c_str(), FileSystem::getPath("texture.fs").c_str());
+    Shader ourShader(FileSystem::getShaderPath("texture.vs").c_str(), FileSystem::getShaderPath("texture.fs").c_str());
 
     // set up vertex data (and buffer(s)) and configure vertex attributes
     // ------------------------------------------------------------------
@@ -110,7 +110,7 @@ int main()
     int width, height, nrChannels;
     stbi_set_flip_vertically_on_load(true); // tell stb_image.h to flip loaded texture's on the y-axis.
     // The FileSystem::getPath(...) is part of the GitHub repository so we can find files on any IDE/platform; replace it with your own image path.
-    unsigned char *data = stbi_load(FileSystem::getPath("resources/textures/container.jpg").c_str(), &width, &height, &nrChannels, 0);
+    unsigned char *data = stbi_load(FileSystem::getResourcePath("resources/textures/container.jpg").c_str(), &width, &height, &nrChannels, 0);
     if (data)
     {
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
@@ -153,9 +153,6 @@ int main()
     // or set it via the texture class
     ourShader.setInt("texture2", 1);
 
-    glm::mat4 trans = glm::mat4(1.0f);
-    trans = glm::rotate(trans, glm::radians(90.0f), glm::vec3(0, 0, 1.0));
-    // trans = glm::scale(trans, glm::vec3(1.5f, 1.5f, 1.0));
     unsigned int translationLocation = glGetUniformLocation(ourShader.ID, "transform");
 
     // render loop
@@ -171,7 +168,8 @@ int main()
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
-        trans = glm::rotate(trans, (float)glfwGetTime(), glm::vec3(0, 0, 1.0));
+        glm::mat4 trans = glm::mat4(1.0f);
+        trans = glm::rotate(trans, (float)glfwGetTime() * mixValue * 24 , glm::vec3(0, 0, 1.0));
         glUniformMatrix4fv(translationLocation, 1, GL_FALSE, glm::value_ptr(trans));
 
         // bind textures on corresponding texture units

@@ -14,8 +14,11 @@ endif()
 set(RESOURCE_ROOT "${CMAKE_SOURCE_DIR}/resources/")
 message("source_root=${RESOURCE_ROOT}")
 # 每个课程对应地当前目录
-set(SRC_ROOT "${CMAKE_SOURCE_DIR}/0-Gettings-Started/Textures/")
+set(SRC_ROOT "${CMAKE_SOURCE_DIR}/0-Gettings-Started/Transformations")
 message("src_root=${SRC_ROOT}")
+file(GLOB MAIN_SRC "${SRC_ROOT}/1-2-container-rotate-scale.cc")
+message("main_src=${MAIN_SRC}")
+
 # 在根目录下configuration定义，然后 build/configuration/root_directory.h 
 configure_file(${CMAKE_SOURCE_DIR}/configuration/root_directory.h.in ${CMAKE_BINARY_DIR}/configuration/root_directory.h)
 include_directories(${CMAKE_BINARY_DIR}/configuration)
@@ -39,7 +42,6 @@ set_target_properties(glad PROPERTIES
 
 include_directories(${CMAKE_SOURCE_DIR}/include) #添加头文件
 
-file(GLOB MAIN_SRC "${SRC_ROOT}/0-container-face.cc")
 # 生成可执行文件 ${PROJECT_NAME}
 add_executable(${PROJECT_NAME} ${MAIN_SRC})
 

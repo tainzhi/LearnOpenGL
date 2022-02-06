@@ -1,5 +1,8 @@
-const char * logl_root = "${CMAKE_SOURCE_DIR}";
+#ifndef ROOT_DIRECTORY_H
+#define ROOT_DIRECTORY_H
+
+const char * project_root = "${CMAKE_SOURCE_DIR}";
 const char * src_root = "${SRC_ROOT}";
 const char * resource_root = "${RESOURCE_ROOT}";
-// const char * src_root = "@SRC_ROOT@";
-// const char * resource_root = "@RESOURCE_ROOT@";
+
+#endif
