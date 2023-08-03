@@ -24,7 +24,7 @@
 				"cwd": "./" //当前执行目录
 			},
 			"windows": {
-				"command": "${workspaceFolder}\\build\\myLearnOpenGL.exe"
+				"command": "${workspaceFolder}\\build\\Debug\\myLearnOpenGL.exe"
 			},
 			"linux": {
 				"command": "make -C build -j8 && ${workspaceFolder}/build/myLearnOpenGL"

@@ -35,16 +35,16 @@ file(GLOB GLAD_HEADER "${CMAKE_SOURCE_DIR}/glad/include/")
 
 # glfw3
 if(CMAKE_SYSTEM_NAME MATCHES "Linux") 
-        set(GLFW3_LIB "${CMAKE_SOURCE_DIR}/glfw-3.3.4/lib/Linux/libglfw3.a")
+        set(GLFW3_LIB "${CMAKE_SOURCE_DIR}/glfw3/lib/Linux/libglfw3.a")
 elseif(CMAKE_SYSTEM_NAME MATCHES "Windows")
-        set(GLFW3_LIB "${CMAKE_SOURCE_DIR}/glfw-3.3.4/lib/Windows/glfw3.lib")
+        set(GLFW3_LIB "${CMAKE_SOURCE_DIR}/glfw3/lib/Windows/glfw3.lib")
 elseif(CMAKE_SYSTEM_NAME MATCHES "FreeBSD") 
-        set(GLFW3_LIB "${CMAKE_SOURCE_DIR}/glfw-3.3.4/lib/Apple/libglfw3.a")
+        set(GLFW3_LIB "${CMAKE_SOURCE_DIR}/glfw3/lib/Apple/libglfw3.a")
 endif()
 add_library(glfw3 STATIC IMPORTED)
 set_target_properties(glfw3 PROPERTIES
         IMPORTED_LOCATION ${GLFW3_LIB}
-        INTERFACE_INCLUDE_DIRECTORIES "${CMAKE_SOURCE_DIR}/glfw-3.3.4/include"
+        INTERFACE_INCLUDE_DIRECTORIES "${CMAKE_SOURCE_DIR}/glfw3/include"
 )
 
 # add_library(soil STATIC IMPORTED)
