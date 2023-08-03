@@ -1,21 +1,49 @@
+// 参考：https://code.visualstudio.com/docs/editor/tasks
 {
 	"version": "2.0.0",
 	"tasks": [
+		// 先build后run
+		// 所有使用compound taskk
 		{
+			"label": "build",
 			"type": "shell",
-			"label": "make_run",
-			"command": "cmake -G 'Unix Makefiles' -S. -Bbuild -DCMAKE_BUILD_TYPE=Debug && make -C build -j8 && ./build/myLearnOpenGL",
 			"options": {
 				"cwd": "./" //当前执行目录
 			},
+			"windows": {
+				"command": "cmake.exe --build ${workspaceFolder}\\build --config Debug --target ALL_BUILD -j 10 --"
+			},
+			"linux": {
+				"command": "cmake -G 'Unix Makefiles' -S. -Bbuild -DCMAKE_BUILD_TYPE=Debug"
+			},
+		},
+		{
+			"label": "make",
+			"type": "shell",
+			"options": {
+				"cwd": "./" //当前执行目录
+			},
+			"windows": {
+				"command": "${workspaceFolder}\\build\\myLearnOpenGL.exe"
+			},
+			"linux": {
+				"command": "make -C build -j8 && ${workspaceFolder}/build/myLearnOpenGL"
+			}
+		},
+		{
+			"label": "run: build&&make",
+			"dependsOrder": "sequence",
+			"dependsOn": [
+				"build",
+				"make"
+			],
 			"presentation": {
-                "echo": true,
-                "reveal": "always", // 在“终端”中显示编译信息的策略，可以为always，silent，never。具体参见VSC的文档
-                "focus": false, // 设为true后可以使执行task时焦点聚集在终端，但对编译c和c++来说，设为true没有意义
-                "panel": "shared", // 不同的文件的编译信息共享一个终端面板
+				"echo": true,
+				"reveal": "always", // 在“终端”中显示编译信息的策略，可以为always，silent，never。具体参见VSC的文档
+				"focus": false, // 设为true后可以使执行task时焦点聚集在终端，但对编译c和c++来说，设为true没有意义
+				"panel": "shared", // 不同的文件的编译信息共享一个终端面板
 				"showReuseMessage": true,
-				"clear": true
-            },
+			},
 			"group": "build",
 			"problemMatcher": "$msCompile",
 			"detail": "compiler: /usr/bin/clang++"

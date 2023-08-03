@@ -1,21 +1,4 @@
 ## vscode c++
-能自动补全: 在`.vscode/c_cpp_properties.json`中添加头文件目录, 比如`${workspaceFolder/include}`
-## windows配置gcc/make/g++环境
-下载[mingw-64 win build](http://win-builds.org/doku.php/download) (最好配置下代理，加快下载速度), 解压后安装在**没有空格路径的目录中**, 尤其不能是**c:\program files**. 比如可以是 `D:\ProgramInstalled`. 然后把`bin`目录添加到环境变量中
-
-配置make: 上一步的`bin`目录中的`mingw32-make.exe`, 复制一份, 重命名为`make.exe`
-把
-
-下载 [cmake](https://cmake.org/download/), 解压后添加到环境变量
-
-
-一键执行
-```shell
-cmake -G "Unix Makefiles" -S . -B build && make -C build -j8 && ./build/myLearnOpenGL
-```
-
-**在`.vscode/tasks.json`中已经配置好, 所以可以直接Terminal > Run build task, 快捷键`ctrl + shift + b`**
-
 ### debug
 在`.vscode/tasks.json`中添加了cmake的参数`-DCMAKE_BUILD_TYPE=Debug`, 确定`label:make_run`.
 
@@ -24,56 +7,12 @@ cmake -G "Unix Makefiles" -S . -B build && make -C build -j8 && ./build/myLearnO
 task的执行从Terminal > Run Build Task即可.
 
 `launch.json`从左侧的Run And Debug生成后launch.json并配置好后, 就可以直接F5运行
-
-## linux
-```shell
-# 第一次运行, 可能要清除 CMakeCache.txt
-rm -rf CMakeCache.txt
-cmake CMakeLists.txt && make -j8 && myLearnOpenGL
-```
-
-## 在运行之前, 配置好glad和glfw
-
-### download [glad](https://glad.dav1d.de/) and compile so
-已经下载好, 放置在根目录下`glad`. 需要编译生成静态库`libglad.a`
-```bash
-gcc -Iinclude/ -shared src/glad.c -o glad.so
-
-# windows生成静态库libglad.a
-# 在glad目录, 生成glad.o
-gcc -Iinclude -c .\src\glad.c
-# 生成静态库
-ar -cr libglad.a .\glad.o
-
-# windows, 动态库以 .dll结尾
-# cmake17后, 无法识别dll动态库, 故不采用
-gcc -Iinclude/ --shared .\src\glad.c -o libglad.dll
-```
-
-### [glfw](https://www.glfw.org/download.html)
-也已经下载好源码, 放置在根目录下`glfw-3.3.4`. 当然也可以下载已经编译好的windows lib
-
-当然也可以自行编译
-```
-cd glfw-3.3.4
-# 安装在当前目录下的build
-cmake -G "MinGW Makefiles" -S . -B . -DCMAKE_INSTALL_PREFIX=build
-
-make -j8
-
-# 在build目录下生成lib和include
-make install
-```
 ## download and install [soil](https://github.com/littlstar/soil)
 - 不使用soil, 使用[stb_image](https://learnopengl-cn.github.io/01%20Getting%20started/06%20Textures/)
 - 图片路径只能绝对路径
 
 ## [dowaload glm](https://github.com/g-truc/glm)
 - a header-only library, and thus does not need to be compiled
-
-```shell
-g++ -std=c++11 -I./include -I./glad/include -I./configuration -L./glad -I"glfw-3.3.4/build/include" -L"glfw-3.3.4/build/lib" -lglad -lglfw3 main.cc-o main.exe
-```
 
 ## Reference
 - [LearnOpenGL光照](https://learnopengl-cn.github.io/02%20Lighting/02%20Basic%20Lighting/)

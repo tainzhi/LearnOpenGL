@@ -1,35 +1,69 @@
+// 参考：https://code.visualstudio.com/docs/cpp/c-cpp-properties-schema-reference
 {
+    "env": {
+        // 设置默认项，这样不同platform就无需再设置
+        "myDefaultIncludePath": [
+            "${workspaceRoot}",
+            "${workspaceRoot}/include",
+            "${workspaceRoot}/build/configuration",
+            "${workspaceRoot}/glad/include",
+            "${workspaceRoot}/glfw-3.3.4/include"
+        ],
+        "myCompilerPath": "/usr/local/bin/gcc-7"
+    },
     "configurations": [
         {
-            "name": "Win32",
-            "includePath": [ //includePath 头文件目录
-                "${workspaceFolder}",
-                "${workspaceFolder}/configuration",
-                "${workspaceFolder}/glad/include",
-                "${workspaceFolder}/glfw-3.3.4/build/include",
-                "${workspaceFolder}/include"
-            ],
-            "defines": [
-                "_DEBUG",
-                "UNICODE",
-                "_UNICODE"
-            ],
-            // "compilerPath": "D:/portable software/llvm-mingw-20211002-msvcrt-x86_64/bin/clang++.exe",         //user/mingw/bin/gcc.exe 需要自己配置
-            "cStandard": "c11",
-            "cppStandard": "c++17",
-            "intelliSenseMode": "clang-x64",
-            "browse": { //includePath 头文件目录
-                "path": [
-                    "${workspaceFolder}",
-                    "${workspaceFolder}/configuration",
-                    "${workspaceFolder}/glad/include",
-                    "${workspaceFolder}/glfw-3.3.4/build/include",
-                    "${workspaceFolder}/include"
-                ],
-                "limitSymbolsToIncludedHeaders": true,
-                "databaseFilename": ""
-            },
-            "configurationProvider": "ms-vscode.cmake-tools"
+            // 不同的platform指定不同的配置
+          "name": "Win32",
+          "includePath": [
+            //includePath 头文件目录
+            // "${workspaceRoot}"
+          ],
+          "defines": ["_DEBUG", "UNICODE", "_UNICODE"],
+          "cStandard": "c11",
+          "cppStandard": "c++17",
+          "intelliSenseMode": "clang-x64",
+          "browse": {
+              // 忽略之后，会默认使用 includePath
+            // "path": [
+            // ],
+            "limitSymbolsToIncludedHeaders": true,
+            "databaseFilename": ""
+          },
+          "configurationProvider": "ms-vscode.cmake-tools",
+          "compilerPath": "D:/ProgramInstalled/mingw-w64/bin/g++.exe"
+        },
+        {
+          "name": "Mac",
+          "includePath": [
+            //includePath 头文件目录
+          ],
+          "defines": ["_DEBUG", "UNICODE", "_UNICODE"],
+          "cStandard": "c11",
+          "cppStandard": "c++17",
+          "intelliSenseMode": "clang-x64",
+          "browse": {
+            // "path": [
+            // ],
+            "limitSymbolsToIncludedHeaders": true,
+            "databaseFilename": ""
+          }
+        },
+        {
+          "name": "Linux",
+          "includePath": [
+            //includePath 头文件目录
+          ],
+          "cStandard": "c11",
+          "cppStandard": "c++17",
+          "browse": {
+            // 默认使用 includePath
+            // "path": [
+            // ],
+            "limitSymbolsToIncludedHeaders": true,
+            "databaseFilename": ""
+          },
+          "configurationProvider": "ms-vscode.cmake-tools"
         }
     ],
     "version": 4

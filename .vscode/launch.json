@@ -8,7 +8,7 @@
             "name": "(gdb) 启动",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/build/myLearnOpenGL.exe",
+            "program": "${workspaceFolder}/build/myLearnOpenGL",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",
@@ -16,7 +16,7 @@
             "externalConsole": false,
             "MIMode": "gdb",
             "miDebuggerPath": "gdb",
-            "preLaunchTask": "make_run",
+            // "preLaunchTask": "run: build&&make",
             "setupCommands": [
                 {
                     "description": "为 gdb 启用整齐打印",
