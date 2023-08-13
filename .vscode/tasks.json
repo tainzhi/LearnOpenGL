@@ -2,6 +2,17 @@
 {
 	"version": "2.0.0",
 	"tasks": [
+		{
+			"label": "kill",
+			"type": "shell",
+			"windows": {
+				// "command": "taskkill.exe /F /IM myLearnOpenGL.exe"
+				"command": "Get-Process -Name myLearnOpenGL.exe -ErrorAction SilentlyContinue | ForEach-Object { $_.Kill() } "
+			},
+			"linux": {
+				"command": "cmake -G 'Unix Makefiles' -S. -Bbuild -DCMAKE_BUILD_TYPE=Debug"
+			},
+		},
 		// 先build后run
 		// 所有使用compound taskk
 		{
