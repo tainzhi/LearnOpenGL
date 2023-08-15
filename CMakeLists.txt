@@ -20,7 +20,7 @@ endif()
 set(RESOURCE_ROOT "${CMAKE_SOURCE_DIR}/resources/")
 message("source_root=${RESOURCE_ROOT}")
 # 每个课程对应地当前目录
-set(SRC_ROOT "${CMAKE_SOURCE_DIR}/0-Gettings-Started/Coordinate")
+set(SRC_ROOT "${CMAKE_SOURCE_DIR}/1-Lighting/Colors")
 message("src_root=${SRC_ROOT}")
 file(GLOB MAIN_SRC "${SRC_ROOT}/main.cc")
 message("main_src=${MAIN_SRC}")
