@@ -1,4 +1,7 @@
 ## vscode c++
+
+### set build environment in windows
+msvs can be installed without installing Visual Studio IDE.
 ### debug
 在`.vscode/tasks.json`中添加了cmake的参数`-DCMAKE_BUILD_TYPE=Debug`, 确定`label:make_run`.
 
