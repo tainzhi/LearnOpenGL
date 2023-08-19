@@ -20,7 +20,7 @@ void main()
 	float diff = max(dot(norm, lightDirection), 0.0);
 	vec3 diffuse = diff * lightColor;
 
-	float specularStrength = 0.5;
+	float specularStrength = 0.8;
 	vec3 viewDirection = normalize(viewPos - FragPos);
 	vec3 reflectDirection = reflect(-lightDirection, norm);
 	float spec = pow(max(dot(viewDirection, reflectDirection), 0), 32);
