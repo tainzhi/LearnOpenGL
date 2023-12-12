@@ -10,12 +10,24 @@ msvs can be installed without installing Visual Studio IDE. [参考](https://lea
 task的执行从Terminal > Run Build Task即可.
 
 `launch.json`从左侧的Run And Debug生成后launch.json并配置好后, 就可以直接F5运行
+
+## build/run in mingw
+```
+cmake -S . -B build  -G "MinGW Makefiles"^C
+cmake --build build -j 4
+.\build\myLearOpenGL.exe
+```
+
 ## download and install [soil](https://github.com/littlstar/soil)
 - 不使用soil, 使用[stb_image](https://learnopengl-cn.github.io/01%20Getting%20started/06%20Textures/)
 - 图片路径只能绝对路径
 
 ## [dowaload glm](https://github.com/g-truc/glm)
 - a header-only library, and thus does not need to be compiled
+
+## [glfw](https://learnopengl.com/Getting-started/Creating-a-window)
+https://www.glfw.org/docs/latest/compile.html
+一般不需要重新配置，目前已经编译好 Apple/windows/mingw 系统的lib库。如果需要，可以自行编译添加
 
 ## Reference
 - [LearnOpenGL光照](https://learnopengl-cn.github.io/02%20Lighting/02%20Basic%20Lighting/)
