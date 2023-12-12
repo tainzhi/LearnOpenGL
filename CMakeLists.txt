@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.17)
+cmake_minimum_required(VERSION 3.12)
 
 # enable C++17
 set(CMAKE_CXX_STANDARD 17)
@@ -34,12 +34,20 @@ file(GLOB GLAD_SRC "${CMAKE_SOURCE_DIR}/glad/src/glad.c")
 file(GLOB GLAD_HEADER "${CMAKE_SOURCE_DIR}/glad/include/")
 
 # glfw3
-if(CMAKE_SYSTEM_NAME MATCHES "Linux") 
-        set(GLFW3_LIB "${CMAKE_SOURCE_DIR}/glfw3/lib/Linux/libglfw3.a")
-elseif(CMAKE_SYSTEM_NAME MATCHES "Windows")
-        set(GLFW3_LIB "${CMAKE_SOURCE_DIR}/glfw3/lib/Windows/glfw3.lib")
-elseif(CMAKE_SYSTEM_NAME MATCHES "FreeBSD") 
-        set(GLFW3_LIB "${CMAKE_SOURCE_DIR}/glfw3/lib/Apple/libglfw3.a")
+if(CMAKE_CXX_COMPILER MATCHES ".*mingw.*")  
+        message(STATUS "MinGW compiler detected, so link glfw3 mingw library")  
+        set(GLFW3_LIB "${CMAKE_SOURCE_DIR}/glfw3/lib/mingw/libglfw3.a")
+else()  
+        if(CMAKE_SYSTEM_NAME MATCHES "Linux") 
+                message(STATUS "link glfw3 linux library")  
+                set(GLFW3_LIB "${CMAKE_SOURCE_DIR}/glfw3/lib/Linux/libglfw3.a")
+        elseif(CMAKE_SYSTEM_NAME MATCHES "Windows")
+                message(STATUS "link glfw3 windows library")  
+                set(GLFW3_LIB "${CMAKE_SOURCE_DIR}/glfw3/lib/Windows/glfw3.lib")
+        elseif(CMAKE_SYSTEM_NAME MATCHES "FreeBSD") 
+                message(STATUS "link glfw3 apple library")  
+                set(GLFW3_LIB "${CMAKE_SOURCE_DIR}/glfw3/lib/Apple/libglfw3.a")
+        endif()
 endif()
 add_library(glfw3 STATIC IMPORTED)
 set_target_properties(glfw3 PROPERTIES
