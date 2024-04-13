@@ -5,37 +5,43 @@
     "version": "0.2.0",
     "configurations": [
         {
-            // "name": "debug",
-            // "type": "cppdbg",
-            // "request": "launch",
-            // "program": "${workspaceFolder}/build/Debug/myLearnOpenGL",
-            // "args": [],
-            // "stopAtEntry": false,
-            // "cwd": "${workspaceFolder}",
-            // "environment": [],
-            // "externalConsole": false,
-            // "linux": {
-            //     "MIMode": "gdb",
-            //     "miDebuggerPath": "gdb",
-            // },
-            // "preLaunchTask": "run: build&&make",
-            // "setupCommands": [
-            //     {
-            //         "description": "为 gdb 启用整齐打印",
-            //         "text": "-enable-pretty-printing",
-            //         "ignoreFailures": true
-            //     }
-            // ]
+            "name": "mingw gdb",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/myLearnOpenGL",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${fileDirname}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "miDebuggerPath": "gdb",
+            // 在debug之前，先构建好要debug的程序
+            "preLaunchTask": "build",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "Set Disassembly Flavor to Intel",
+                    "text": "-gdb-set disassembly-flavor intel",
+                    "ignoreFailures": true
+                }
+            ]
+        },
+        {
              "name": "msvc launch",
             "type": "cppvsdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/build/Debug/myLearnOpenGL",
+            "program": "${workspaceFolder}/build/myLearnOpenGL",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],
             "externalConsole": false,
-            "preLaunchTask": "run: build&&make",
+            "preLaunchTask": "build",
         }
     ]
 }

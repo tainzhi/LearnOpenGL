@@ -1,6 +1,8 @@
 ## vscode c++
 
-### set build environment in windows
+### ~~set build environment in windows~~
+在公司环境下使用vc++有法律风险，建议使用mingw
+
 msvs can be installed without installing Visual Studio IDE. [参考](https://learn.microsoft.com/en-us/cpp/build/building-on-the-command-line?view=msvc-160)
 ### debug
 在`.vscode/tasks.json`中添加了cmake的参数`-DCMAKE_BUILD_TYPE=Debug`, 确定`label:make_run`.
@@ -12,9 +14,11 @@ task的执行从Terminal > Run Build Task即可.
 `launch.json`从左侧的Run And Debug生成后launch.json并配置好后, 就可以直接F5运行
 
 ## build/run in mingw
+建议在windows下用 mingw，因为vc++在公司环境下使用有法律风险。
+通过 scoop 安装cpp环境 `scoop install cmake` 和 `scoop install mingw`
 ```
-cmake -S . -B build  -G "MinGW Makefiles"^C
-cmake --build build -j 4
+cmake -S. -Bbuild  -G "MinGW Makefiles"
+cmake --build build
 .\build\myLearOpenGL.exe
 ```
 
